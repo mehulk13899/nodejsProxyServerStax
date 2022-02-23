@@ -11,6 +11,10 @@ const PORT = process.env.PORT || 3000;
 // Logging
 app.use(morgan('dev'));
 
+app.use(function (req, res, next) {
+    req.setTimeout(0) // no timeout for all requests, your server will be DoS'd
+    next()
+})
 // Info GET endpoint
 app.get('/info', (req, res, next) => {
     res.send('This is a proxy service which proxies to JSONPlaceholder API.');
